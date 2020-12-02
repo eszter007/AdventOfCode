@@ -20,9 +20,11 @@ def convertToDicts():
 		policies.append(passwordPolicy)
 	return policies
 
+convertedDicts = convertToDicts()
+
 def task1():
 	counter = 0
-	for value in convertToDicts():
+	for value in convertedDicts:
 		if bool(value):
 			occurences = value["password"].count(value["letter"])
 			if value["policyTuple"][0] <= value["password"].count(value["letter"]) <= value["policyTuple"][1]:
@@ -31,7 +33,7 @@ def task1():
 
 def task2():
 	counter = 0
-	for value in convertToDicts():
+	for value in convertedDicts:
 		if bool(value):
 			validator = False
 			first = value["password"][value["policyTuple"][0]-1]
