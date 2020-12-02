@@ -7,14 +7,11 @@ def convertToDicts():
 	policies = [dict()]
 	for line in data:
 		subset = line.split(" ")
-		times = tuple(map(int, subset[0].split("-")))
-		letterToBeContained = subset[1][0]
-		password = subset[2]
-		
+
 		passwordPolicy = {
-			"policyTuple": times, 
-			"letter": letterToBeContained,
-			"password": password,
+			"policyTuple": tuple(map(int, subset[0].split("-"))), 
+			"letter": subset[1][0],
+			"password": subset[2]
 		}
 		
 		policies.append(passwordPolicy)
