@@ -24,6 +24,6 @@ def task():
 	round5 = evaluate(1, 2)
 	
 	print("Part 1: " + str(round2))
-	print("Part 2: " + str(round1 * round2 * round3* round4* round5))
+	print("Part 2: " + str(round1 * round2 * round3 * round4 * round5))
 	
 task()
