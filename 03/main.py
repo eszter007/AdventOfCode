@@ -8,7 +8,6 @@ data = [[character for character in line.strip()] for line in open(file, 'r')]
 def evaluate(right, down):
 	position = 0
 	treeCounter = 0
-	isSkipped = False
 	for line in data[::down]:
 		while len(line) <= position:
 			line += line
