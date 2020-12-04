@@ -44,13 +44,13 @@ def task2():
 	for passport in validPassports:
 		if birthYear(passport) and issueYear(passport) and expirationDate(passport) \
 		and hairColor(passport) and eyeColor(passport) and passPortID(passport):
-				unit = passport['hgt'][-2:]
-				try:
-					height = int(passport['hgt'][:-2])
-				except:
-					continue
-				if unitCheck(height, unit):
-						counter += 1
+			unit = passport['hgt'][-2:]
+			try:
+				height = int(passport['hgt'][:-2])
+			except:
+				continue
+			if unitCheck(height, unit):
+					counter += 1
 	print("Task 2: " + str(counter))
 						
 
