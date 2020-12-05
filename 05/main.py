@@ -5,10 +5,11 @@ data = [line.strip() for line in open(file, 'r')]
 
 def calculateRow (smallestNo, highestNo, rowRange):
 	for character in rowRange:
+		diff = math.floor((highestNo - smallestNo)/2)
 		if character == "F" or character == "L":
-			highestNo = math.floor((highestNo - smallestNo)/2) + smallestNo
+			highestNo = diff + smallestNo
 		if character == "B" or character == "R":
-			smallestNo = highestNo - math.floor((highestNo - smallestNo)/2) 
+			smallestNo = highestNo - diff
 		if highestNo == smallestNo:
 			return smallestNo
 
