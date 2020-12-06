@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import math
+
 file = "input.txt"
 data = [line.strip() for line in open(file, 'r')]
 
