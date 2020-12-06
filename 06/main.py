@@ -35,6 +35,6 @@ def part2():
 				if item[1].count(character) == item[0]:
 					counter += 1
 					item[1] = item[1].replace(character, "")
-	print(counter)
+	print("Part 2: " + str(counter))
 	
 part2()
