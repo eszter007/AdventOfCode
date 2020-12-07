@@ -2,7 +2,6 @@
 file = "example.txt"
 data = [line.strip() for line in open(file, 'r')]
 
-#format data
 items = dict()
 for line in data:
 	splittedLine = line.replace("bags", "").split(" contain ")
@@ -13,17 +12,18 @@ for key, value in items.items():
 	bags = []
 	for bag in value:
 		if "no other" in bag:
-			bags.append("0")
+			bags.append(("", 0))
 		else: 
-			bags.append(bag.strip().replace(" .", "").replace(".", "").replace("bags", "").replace("bag", "").strip())
-
+			formattedBag = bag.strip().replace(" .", "").replace(".", "").replace("bags", "").replace("bag", "").strip()
+			bagTuple = (formattedBag[2:], int(formattedBag[0]))
+			bags.append(bagTuple)
 	items.update({key: bags})
 
 def getOuterBag(bag):
 	bagSet = set()
 	for key, value in items.items():
 		for v in value:
-			if v[2:] == bag:
+			if v[0] == bag:
 				bagSet.add(key)
 	return bagSet
 
