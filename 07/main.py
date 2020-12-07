@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-file = "example.txt"
+file = "input.txt"
 data = [line.strip() for line in open(file, 'r')]
 
 items = dict()
@@ -43,8 +43,22 @@ def part1():
 	oldSize = len(bagSet)
 	while counter != oldSize:
 		oldSize = len(bagSet)
-		bagSet|= goThrougSet(bagSet)
+		bagSet |= goThrougSet(bagSet)
 		counter = len(bagSet)
 	return counter
 
 print("Part 1: " + str(part1()))
+
+def getSubBagsCount(key):
+	nestedBags = items[key]
+	if nestedBags[0][0] == "":
+		return 0
+	else:
+		counter = 0
+		
+		for bag in nestedBags:
+			counter += bag[1] + bag[1] * getSubBagsCount(bag[0])
+			
+		return counter
+
+print("Part 2: " + str(getSubBagsCount("shiny gold")))
