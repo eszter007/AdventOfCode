@@ -18,8 +18,8 @@ def part1():
 
 """
 Approach:
-- Split sorted array into subarrays 
-- Solve problems indenpendently (max length = 5)
+- Split sorted array into smaller chunks
+- Solve problems independently (max length = 5)
 - Multiply the results
 """
 	
