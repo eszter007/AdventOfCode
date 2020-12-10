@@ -3,23 +3,23 @@ file = "input.txt"
 data = sorted([int(line) for line in open(file, 'r')])
 
 def part1():
-	OneCounter = 0
-	ThreeCounter = 1
+	oneCounter = 0
+	threeCounter = 1
 	for i in range(0, len(data)):
 		if i > 0 and i < len(data)-1:
 			difference = data[i+1] - data[i]
 		elif i == 0: difference = data[i]
 		else: difference = data[i] - data[i-1]
 		if difference == 1:
-			OneCounter += 1
+			oneCounter += 1
 		elif difference == 3:
-			ThreeCounter += 1
-	print("Part 1: " + str(ThreeCounter*OneCounter))
+			threeCounter += 1
+	print("Part 1: " + str(threeCounter*oneCounter))
 
 """
 Approach:
 - Split sorted array into subarrays 
-- Solve problems idenpendently (max length = 5)
+- Solve problems indenpendently (max length = 5)
 - Multiply the results
 """
 	
@@ -47,10 +47,9 @@ def part2():
 			subarrays[j].append(data[i])
 		else:
 			difference = 0
-			secondDifference = 0
 			if len(subarrays[j]) > 0: 
-				secondDifference = data[i] - subarrays[j][-1]
-			if secondDifference == 3:
+				difference = data[i] - subarrays[j][-1]
+			if difference == 3:
 				j += 1
 				subarrays.append([])
 				subarrays[j].append(data[i])
