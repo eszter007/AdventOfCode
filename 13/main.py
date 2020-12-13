@@ -24,7 +24,7 @@ part1()
 
 def part2():
 	time = 0
-	stamp = 1
+	size = 1
 	busOffSets = []
 	
 	for bus in busses:
@@ -34,9 +34,11 @@ def part2():
 			busOffSets.append((int(bus), busses.index(bus)))
 	
 	for bus, offset in busOffSets:
+		# until optimal time isn't found
 		while (time + offset) % bus:
-			time += stamp
-		stamp *= bus
+			time += size
+		# in order to skip times where a solution isn't possible
+		size *= bus
 	
 	print("Part 2: " + str(time))
 
