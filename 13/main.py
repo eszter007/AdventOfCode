@@ -5,12 +5,13 @@ data = [line.strip() for line in open(file, 'r')]
 
 departure = int(data[0])
 busses = data[1].split(",")
-busNos = []
-for bus in busses:
-	if bus != "x":
-		busNos.append(int(bus))
 
 def part1():
+	busNos = []
+	for bus in busses:
+		if bus != "x":
+			busNos.append(int(bus))
+			
 	mod = 0
 	earliestBus = 0
 	for bus in busNos:
