@@ -21,3 +21,23 @@ def part1():
 			earliestBus = bus
 	print("Part 1: " + str(earliestBus*mod))
 part1()
+
+def part2():
+	time = 0
+	stamp = 1
+	busOffSets = []
+	
+	for bus in busses:
+		if bus == "x":
+			continue
+		else:
+			busOffSets.append((int(bus), busses.index(bus)))
+	
+	for bus, offset in busOffSets:
+		while (time + offset) % bus:
+			time += stamp
+		stamp *= bus
+	
+	print("Part 2: " + str(time))
+
+part2()
