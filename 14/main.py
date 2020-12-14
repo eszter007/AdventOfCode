@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from copy import deepcopy
 file = "input.txt"
 data = [line for line in open(file, 'r')]
 
@@ -43,7 +44,14 @@ def getBinaryNumber(decimal):
 		counter += 1
 	return res
 
-def applyMask(mask, binaryNumber):
+def binaryToDecimal(binaryNumber):
+	return int("".join(str(x) for x in binaryNumber), 2) 
+
+#
+# Part 1
+#
+
+def applyMaskNoFloating(mask, binaryNumber):
 	newBinary = []
 	for i in range(0, len(mask)):
 		if mask[i] == "X":
@@ -58,21 +66,77 @@ def applyMask(mask, binaryNumber):
 			newBinary.append(0)
 	return newBinary
 
-def binaryToDecimal(binaryNumber):
-	return int("".join(str(x) for x in binaryNumber), 2) 
-
-#
-# Part 1
-#
-
 def part1():
 	memory = dict()
 	for sequence in sequences:
 		mask = sequence[0][1]
 		values = sequence[1:]
 		for value in values:
-			memory[value[0]] = binaryToDecimal(applyMask(mask, getBinaryNumber(value[1])))
+			memory[value[0]] = binaryToDecimal(applyMaskNoFloating(mask, getBinaryNumber(value[1])))
 	
 	print("Part 1: " + str(sum(memory.values())))
 
 part1()
+
+#
+# Part 2
+#
+
+def applyFloatingMask(mask, binaryNumber):
+	newBinary = []
+	for i in range(0, len(mask)):
+		if mask[i] == "X":
+			newBinary.append(("X"))
+		elif mask[i] == "0":
+			newBinary.append(binaryNumber[i])
+		elif mask[i] == "1":
+			newBinary.append(1)
+	return newBinary
+
+# get the possibilites once
+def getPossibilities(floatingValue):
+	poss = []
+	for i in range(0, len(floatingValue)):
+		b1 = deepcopy(floatingValue)
+		b2 = deepcopy(floatingValue)
+		if floatingValue[i] == "X":
+			b1[i] = 1
+			poss.append(b1)
+			b2[i] = 0
+			poss.append(b2)
+			break
+	return poss
+
+
+def loopPossibilites(mask, binaryNumber):
+	poss = getPossibilities(applyFloatingMask(mask, binaryNumber))
+	
+	while len(poss) != 0:
+		pa = []
+		for p in poss:
+			p = getPossibilities(p)
+			pa += p
+		if len(pa) != 0:
+			poss = pa
+		else: break
+	return poss
+
+def getDecimals(mask, binaryNumber):
+	decimals = []
+	possibilities = loopPossibilites(mask, binaryNumber)
+	for p in possibilities:
+		decimals.append(binaryToDecimal(p))
+	return decimals
+
+def part2():
+	memory = dict()
+	for sequence in sequences:
+		mask = sequence[0][1]
+		values = sequence[1:]
+		for value in values:
+			decs = getDecimals(mask, getBinaryNumber(value[0]))
+			for d in decs:
+				memory[d] = value[1]
+	print("Part 2: " + str(sum(memory.values())))
+
+part2()
