@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-file = "example.txt"
+file = "input.txt"
 data = [line for line in open(file, 'r')]
 
 #
@@ -43,4 +43,36 @@ def getBinaryNumber(decimal):
 		counter += 1
 	return res
 
-print(sequences)
+def applyMask(mask, binaryNumber):
+	newBinary = []
+	for i in range(0, len(mask)):
+		if mask[i] == "X":
+			newBinary.append(binaryNumber[i])
+		elif mask[i] == "1" and binaryNumber[i] == 1:
+			newBinary.append(1)
+		elif mask[i] == "1" and binaryNumber[i] == 0:
+			newBinary.append(1)
+		elif mask[i] == "0" and binaryNumber[i] == 1:
+			newBinary.append(0)
+		elif mask[i] == "0" and binaryNumber[i] == 0:
+			newBinary.append(0)
+	return newBinary
+
+def binaryToDecimal(binaryNumber):
+	return int("".join(str(x) for x in binaryNumber), 2) 
+
+#
+# Part 1
+#
+
+def part1():
+	memory = dict()
+	for sequence in sequences:
+		mask = sequence[0][1]
+		values = sequence[1:]
+		for value in values:
+			memory[value[0]] = binaryToDecimal(applyMask(mask, getBinaryNumber(value[1])))
+	
+	print("Part 1: " + str(sum(memory.values())))
+
+part1()
