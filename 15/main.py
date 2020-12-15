@@ -1,8 +1,23 @@
 #!/usr/bin/env python3
 
-file = "input.txt"
-#data = [(9, False), (19, False), (1, False), (6, False), (0, False) (5, False), (4, False)]
-data = [0, 3, 6
+def part1(numbers, spokenNo):
+	spoken = dict()
+	nextNo = 0
+	position = 1
+	
+	for n in numbers:
+		spoken[n] = position
+		position += 1
+		
+	while position <= spokenNo:
+		current = nextNo
+		if current in spoken: nextNo = position - spoken[current]
+		else:
+			nextNo = 0
+		spoken[current] = position
+		position += 1
+		
+	return current
 
-
-print([item for item in data if item[0] == 0])
+print("Part 1: " + str(part1([9,19,1,6,0,5,4], 2020)))
+print("Part 2: " + str(part1([9,19,1,6,0,5,4], 30000000)))
