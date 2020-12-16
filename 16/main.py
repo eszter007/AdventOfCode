@@ -66,7 +66,7 @@ part1()
 # Part 2
 #
 # To Do
-# Issue: Not all fields are considered
+# Issue: Some fields are missing at all, e.g. 3
 #
 
 for ticket in notes[2]:
