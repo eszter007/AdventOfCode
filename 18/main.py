@@ -23,12 +23,9 @@ def calculate(calc):
 	num = 0
 	symbol = ""
 	for i, char in enumerate(calc):
-		if i == 0:
-			num = char
-		elif char in ["*", "+"]:
-			symbol = char
-		else:
-			num = eval(str(num) + symbol + char)
+		if i == 0: num = char
+		elif char in ["*", "+"]: symbol = char
+		else: num = eval(str(num) + symbol + char)
 	return num
 
 def part1():
