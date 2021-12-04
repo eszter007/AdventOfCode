@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-
-#!/usr/bin/env python3
 import numpy as np
-import statistics
 
 def part1(file):
 	data = np.array([list(map(int, list(line.strip()))) for line in open(file, 'r')]).transpose()
