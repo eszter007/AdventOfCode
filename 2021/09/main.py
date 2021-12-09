@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 data = [list(map(int, list(line.strip()))) for line in open("input.txt", 'r')]
 
-up = None
-down = None
-left = None
-right = None
-
 mins = []
 
 def get_neighbors(row, col):
